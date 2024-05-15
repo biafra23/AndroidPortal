@@ -83,7 +83,6 @@ cargo {
     //prebuiltToolchains = true
     //verbose = true
     apiLevel = 24
-    //cargoCommand = "/Users/biafra/.cargo/bin/cargo"
 //    profile = "debug"
     profile = "release"
 }
