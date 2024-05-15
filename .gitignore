@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+trin-jni-wrapper/target
+.idea
