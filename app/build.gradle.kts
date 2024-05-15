@@ -67,15 +67,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 
-//extensions.configure(CargoExtension::class) {
-//    module = "[module name]"
-//    libname = "[trin]"
-//    targets = listOf("arm", "x86")
-//}
-//
 cargo {
-    module  = "../trin"       // Or whatever directory contains your Cargo.toml
-    libname = "trin"          // Or whatever matches Cargo.toml's [package] name.
+    module  = "../trin-jni-wrapper"       // Or whatever directory contains your Cargo.toml
+    libname = "trin-jni-wrapper"          // Or whatever matches Cargo.toml's [package] name.
     targets = listOf("arm64")  // See bellow for a longer list of options
     prebuiltToolchains = true
     verbose = true
@@ -95,9 +89,3 @@ project.afterEvaluate {
                 }
         }
 }
-
-//tasks.whenTaskAdded { task ->
-//    if ((task.name == "javaPreCompileDebug" || task.name == "javaPreCompileRelease")) {
-//        task.dependsOn "cargoBuild"
-//    }
-//}
