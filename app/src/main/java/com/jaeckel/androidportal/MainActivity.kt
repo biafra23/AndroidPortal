@@ -19,13 +19,14 @@ private external fun runTrin(): String
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        println("onCreate()")
+        println("onCreate()...-+")
         val tmpFile = File.createTempFile("tmp", "")
         val tmpDir = tmpFile.getParentFile()
         android.system.Os.setenv("HOME", tmpDir.absolutePath, true)
         android.system.Os.setenv("RUST_BACKTRACE", "full", true)
         android.system.Os.setenv("RUST_LOG", "debug", true)
-        System.loadLibrary("trin")
+
+        System.loadLibrary("trin_jni_wrapper")
 
         val result = runTrin()
         Toast.makeText(this, result, Toast.LENGTH_LONG).show()

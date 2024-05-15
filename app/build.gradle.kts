@@ -27,6 +27,15 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+//        debug {
+//            // The doNotStrip option is not properly scoped to the "debug" build type
+//            // See https://issuetracker.google.com/issues/155215248.
+//            packaging {
+//                doNotStrip = "**/*.so"
+//            }
+//            debuggable = true
+//            jniDebuggable = true
+//        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -69,12 +78,14 @@ dependencies {
 
 cargo {
     module  = "../trin-jni-wrapper"       // Or whatever directory contains your Cargo.toml
-    libname = "trin-jni-wrapper"          // Or whatever matches Cargo.toml's [package] name.
+    libname = "trin_jni_wrapper"          // Or whatever matches Cargo.toml's [package] name.
     targets = listOf("arm64")  // See bellow for a longer list of options
-    prebuiltToolchains = true
-    verbose = true
+    //prebuiltToolchains = true
+    //verbose = true
     apiLevel = 24
     //cargoCommand = "/Users/biafra/.cargo/bin/cargo"
+//    profile = "debug"
+    profile = "release"
 }
 
 project.afterEvaluate {
