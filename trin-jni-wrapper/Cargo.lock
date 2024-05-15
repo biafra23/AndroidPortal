@@ -7759,6 +7759,7 @@ dependencies = [
  "futures 0.3.30",
  "jni",
  "log",
+ "tracing",
  "trin",
 ]
 

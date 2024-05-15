@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AndroidPortal"
 include(":app")
+include(":trin-jni-wrapper")
