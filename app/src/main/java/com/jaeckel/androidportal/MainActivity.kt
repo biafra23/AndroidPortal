@@ -25,6 +25,7 @@ class MainActivity : ComponentActivity() {
         android.system.Os.setenv("HOME", tmpDir.absolutePath, true)
         android.system.Os.setenv("RUST_BACKTRACE", "full", true)
         android.system.Os.setenv("RUST_LOG", "debug", true)
+        Toast.makeText(this, "System.loadLibrary(trin_jni_wrapper)", Toast.LENGTH_LONG).show()
 
         System.loadLibrary("trin_jni_wrapper")
 

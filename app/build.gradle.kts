@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -26,16 +28,13 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            android.packagingOptions.jniLibs.keepDebugSymbols += "**/*.so"
         }
-//        debug {
-//            // The doNotStrip option is not properly scoped to the "debug" build type
-//            // See https://issuetracker.google.com/issues/155215248.
-//            packaging {
-//                doNotStrip = "**/*.so"
-//            }
+        debug {
+            android.packagingOptions.jniLibs.keepDebugSymbols += "**/*.so"
 //            debuggable = true
 //            jniDebuggable = true
-//        }
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -83,8 +82,9 @@ cargo {
     //prebuiltToolchains = true
     //verbose = true
     apiLevel = 24
-//    profile = "debug"
-    profile = "release"
+    profile = "debug"
+//    profile = "release"
+    //extraCargoBuildArguments = listOf("+1.76-")
 }
 
 project.afterEvaluate {
@@ -99,3 +99,5 @@ project.afterEvaluate {
                 }
         }
 }
+
+
