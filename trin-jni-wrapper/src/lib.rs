@@ -52,16 +52,13 @@ pub fn start_runtime() {
             let mut config = TrinConfig::default();
             config.no_stun = true;
             config.no_upnp = true;
-            config.discovery_port = 9091;
+            config.discovery_port = 9009;
             //config.external_addr = "127.0.0.1";
 
-            let sock = UdpSocket::bind("0.0.0.0:9092").await;
-            debug!("Socket:  {:?}", sock);
+//             let sock = UdpSocket::bind("0.0.0.0:9009").await;
+//             debug!("Socket:  {:?}", sock);
 
-            let sock = UdpSocket::bind("0.0.0.0:9092").await;
-            debug!("Socket:  {:?}", sock);
-
-            info!("Starting ... ");
+            info!("Starting trin... ");
             let result_future = run_trin(config);
             let result = executor::block_on(result_future);
             info!("...Done.");
