@@ -53,10 +53,10 @@ pub fn start_runtime() {
             config.no_stun = true;
             config.no_upnp = true;
             config.discovery_port = 9009;
-            //config.external_addr = "127.0.0.1";
 
-//             let sock = UdpSocket::bind("0.0.0.0:9009").await;
-//             debug!("Socket:  {:?}", sock);
+            // Binding to the socket here doesn't crash the app.
+            let sock = UdpSocket::bind("0.0.0.0:9009").await;
+            debug!("Socket:  {:?}", sock);
 
             info!("Starting trin... ");
             let result_future = run_trin(config);
@@ -65,30 +65,6 @@ pub fn start_runtime() {
 
         })
 
-
-//     unsafe {
-//         RUNTIME.replace(
-//             tokio::runtime::Builder::new_multi_thread()
-//                 .threaded_scheduler()
-//                 .core_threads(runtime_core_threads_count())
-//                 .on_thread_start(|| {
-//                     info!("Tokio worker thread started: {:?}", std::thread::current().id());
-//
-//                     info!(
-//                         "Attaching Tokio worker thread with JVM: {:?}",
-//                         std::thread::current().id()
-//                     );
-//                     //crate::bridge::jvm().attach_thread();
-//                 })
-//                 .on_thread_stop(|| {
-//                     info!("Tokio worker thread stopped: {:?}", std::thread::current().id());
-//                 })
-//                 .enable_io()
-//                 .enable_time()
-//                 .build()
-//                 .unwrap(),
-//         );
-//     }
 }
 /// Calls whenever the runtime is shut down.
 pub fn shutdown_runtime() {
