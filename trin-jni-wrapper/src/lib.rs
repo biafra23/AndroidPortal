@@ -8,12 +8,17 @@ use log::{info, LevelFilter};
 use android_logger::Config;
 use tracing::log::debug;
 extern crate android_logger;
+use std::panic;
 
 #[no_mangle]
 extern fn Java_com_jaeckel_androidportal_MainActivityKt_runTrin(env: JNIEnv<'_>, _: JObject<'_>) -> jstring {
     android_logger::init_once(
         Config::default().with_max_level(LevelFilter::Trace),
     );
+    panic::set_hook(Box::new(|pi| {
+        info!("{pi}");
+    }));
+
     info!("start_runtime");
 
     start_runtime();
