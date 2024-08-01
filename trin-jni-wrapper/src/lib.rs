@@ -49,28 +49,27 @@ pub fn start_runtime() {
         runtime_core_threads_count()
     );
 
-    let rt = tokio::runtime::Builder::new_multi_thread()
+    tokio::runtime::Builder::new_multi_thread()
         .enable_all()
         .build()
-        .unwrap();
+        .unwrap()
+        .block_on(async {
+            let mut config = TrinConfig::default();
+            config.no_stun = false;
+            config.no_upnp = false;
+            config.discovery_port = 9009;
+            config.web3_transport = Web3TransportType::HTTP;
 
-    rt.block_on(async {
-        let mut config = TrinConfig::default();
-        config.no_stun = false;
-        config.no_upnp = false;
-        config.discovery_port = 9009;
-        config.web3_transport = Web3TransportType::HTTP;
+            info!("Starting trin... ");
+            let result_future = run_trin(config);
+            let result = executor::block_on(result_future);
+            match result {
+                Ok(_) => info!("--> Result Ok()."),
+                Err(e) => info!("--> Error: {}", e),
+            }
 
-        info!("Starting trin... ");
-        let result_future = run_trin(config);
-        let result = executor::block_on(result_future);
-        match result {
-            Ok(_) => info!("--> Result Ok()."),
-            Err(e) => info!("--> Error: {}", e),
-        }
-
-        info!("...Done.");
-    });
+            info!("...Done.");
+        });
 }
 /// Calls whenever the runtime is shut down.
 pub fn shutdown_runtime() {
