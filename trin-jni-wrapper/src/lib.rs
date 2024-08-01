@@ -3,7 +3,7 @@ use jni::objects::{JObject};
 use jni::sys::jstring;
 use futures::executor;
 use trin::run_trin;
-use ethportal_api::types::cli::TrinConfig;
+use ethportal_api::types::cli::{TrinConfig, Web3TransportType};
 use log::{info, LevelFilter};
 use android_logger::Config;
 use tracing::log::debug;
@@ -23,13 +23,13 @@ extern fn Java_com_jaeckel_androidportal_MainActivityKt_runTrin(env: JNIEnv<'_>,
 
     start_runtime();
 
-//     let result_future = run_trin(config);
-//     let result = executor::block_on(result_future);
-//     match result {
-//         Ok(_) => env.new_string("Ok.").unwrap().into_inner(),
-//         _default => env.new_string("Error.").unwrap().into_inner()
-//     }
-   env.new_string("Ok.").unwrap().into_inner()
+    //     let result_future = run_trin(config);
+    //     let result = executor::block_on(result_future);
+    //     match result {
+    //         Ok(_) => env.new_string("Ok.").unwrap().into_inner(),
+    //         _default => env.new_string("Error.").unwrap().into_inner()
+    //     }
+    env.new_string("Ok.").unwrap().into_inner()
 }
 
 use std::future::Future;
@@ -49,27 +49,28 @@ pub fn start_runtime() {
         runtime_core_threads_count()
     );
 
-    tokio::runtime::Builder::new_multi_thread()
+    let rt = tokio::runtime::Builder::new_multi_thread()
         .enable_all()
         .build()
-        .unwrap()
-        .block_on(async {
-            let mut config = TrinConfig::default();
-            config.no_stun = true;
-            config.no_upnp = true;
-            config.discovery_port = 9009;
+        .unwrap();
 
-            // Binding to the socket here doesn't crash the app.
-            let sock = UdpSocket::bind("0.0.0.0:9009").await;
-            debug!("Socket:  {:?}", sock);
+    rt.block_on(async {
+        let mut config = TrinConfig::default();
+        config.no_stun = false;
+        config.no_upnp = false;
+        config.discovery_port = 9009;
+        config.web3_transport = Web3TransportType::HTTP;
 
-            info!("Starting trin... ");
-            let result_future = run_trin(config);
-            let result = executor::block_on(result_future);
-            info!("...Done.");
+        info!("Starting trin... ");
+        let result_future = run_trin(config);
+        let result = executor::block_on(result_future);
+        match result {
+            Ok(_) => info!("--> Result Ok()."),
+            Err(e) => info!("--> Error: {}", e),
+        }
 
-        })
-
+        info!("...Done.");
+    });
 }
 /// Calls whenever the runtime is shut down.
 pub fn shutdown_runtime() {
