@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.Packaging
-
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -82,8 +80,8 @@ cargo {
     //prebuiltToolchains = true
     //verbose = true
     apiLevel = 24
-    profile = "debug"
-//    profile = "release"
+//    profile = "debug"
+    profile = "release"
     //extraCargoBuildArguments = listOf("+1.76-")
 }
 
