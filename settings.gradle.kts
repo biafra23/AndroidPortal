@@ -17,9 +17,17 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://jitpack.io")
+        }
+        maven { url = uri("https://artifacts.consensys.net/public/maven/maven/") }
+        maven { url = uri("https://artifacts.consensys.net/public/teku/maven/") }
+        maven { url = uri("https://mvnrepository.com") }
+        maven { url = uri("https://hyperledger.jfrog.io/artifactory/besu-maven/") }
+        maven { url = uri("https://dl.cloudsmith.io/public/libp2p/jvm-libp2p/maven/") }
     }
 }
 
 rootProject.name = "AndroidPortal"
 include(":app")
-include(":trin-jni-wrapper")
+//include(":trin-jni-wrapper")
