@@ -842,28 +842,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "async-stream"
-version = "0.3.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd56dd203fef61ac097dd65721a419ddccb106b2d2b70ba60a6b529f03961a51"
-dependencies = [
- "async-stream-impl",
- "futures-core",
- "pin-project-lite",
-]
-
-[[package]]
-name = "async-stream-impl"
-version = "0.3.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "16e62a023e7c117e27523144c5d2459f4397fcc3cab0085af8e2224f643a0193"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.63",
-]
-
-[[package]]
 name = "async-task"
 version = "4.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1920,7 +1898,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e4355c25cbf99edcb6b4a0e906f6bdc6956eda149e84455bea49696429b2f8e8"
 dependencies = [
  "futures 0.3.30",
- "tokio-util 0.7.11",
+ "tokio-util 0.7.11 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -2059,6 +2037,36 @@ checksum = "212d0f5754cb6769937f4501cc0e67f4f4483c8d2c3e1e922ee9edbe4ab4c7c0"
 [[package]]
 name = "discv5"
 version = "0.4.1"
+dependencies = [
+ "aes 0.7.5",
+ "aes-gcm 0.9.2",
+ "arrayvec 0.7.4",
+ "delay_map",
+ "enr",
+ "fnv",
+ "futures 0.3.30",
+ "hashlink 0.8.4",
+ "hex",
+ "hkdf 0.12.4",
+ "lazy_static",
+ "lru 0.12.3",
+ "more-asserts",
+ "parking_lot 0.11.2",
+ "rand 0.8.5",
+ "rlp",
+ "smallvec 1.13.2",
+ "socket2 0.4.10",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tracing",
+ "uint",
+ "zeroize",
+]
+
+[[package]]
+name = "discv5"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bac33cb3f99889a57e56a8c6ccb77aaf0cfc7787602b7af09783f736d77314e1"
 dependencies = [
  "aes 0.7.5",
  "aes-gcm 0.9.2",
@@ -2660,7 +2668,7 @@ dependencies = [
  "c-kzg",
  "clap",
  "const_format",
- "discv5",
+ "discv5 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "eth_trie",
  "ethereum_hashing",
  "ethereum_serde_utils",
@@ -2688,10 +2696,7 @@ dependencies = [
  "ssz_types",
  "superstruct",
  "thiserror",
- "tokio 1.37.0",
- "tokio-macros 2.2.0",
- "tokio-stream 0.1.15",
- "tokio-util 0.7.10",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tree_hash",
  "tree_hash_derive",
  "trin-utils",
@@ -3228,7 +3233,7 @@ dependencies = [
  "indexmap 2.2.6",
  "slab",
  "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "tokio-util 0.7.11",
+ "tokio-util 0.7.11 (registry+https://github.com/rust-lang/crates.io-index)",
  "tracing",
 ]
 
@@ -3840,7 +3845,7 @@ dependencies = [
  "thiserror",
  "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tokio-rustls",
- "tokio-util 0.7.11",
+ "tokio-util 0.7.11 (registry+https://github.com/rust-lang/crates.io-index)",
  "tracing",
  "url",
  "webpki-roots 0.25.4",
@@ -3923,7 +3928,7 @@ dependencies = [
  "thiserror",
  "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tokio-stream 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
- "tokio-util 0.7.11",
+ "tokio-util 0.7.11 (registry+https://github.com/rust-lang/crates.io-index)",
  "tower",
  "tracing",
 ]
@@ -4195,10 +4200,7 @@ dependencies = [
  "ssz_types",
  "strum",
  "thiserror",
- "tokio 1.37.0",
- "tokio-macros 2.2.0",
- "tokio-stream 0.1.15",
- "tokio-util 0.7.10",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tracing",
  "tracing-subscriber",
  "tree_hash",
@@ -5071,7 +5073,7 @@ dependencies = [
  "async-trait",
  "chrono",
  "clap",
- "discv5",
+ "discv5 0.4.1",
  "eth_trie",
  "ethereum_ssz",
  "ethereum_ssz_derive",
@@ -5092,7 +5094,7 @@ dependencies = [
  "tokio 1.37.0",
  "tokio-macros 2.2.0",
  "tokio-stream 0.1.15",
- "tokio-util 0.7.10",
+ "tokio-util 0.7.11",
  "tracing",
  "tracing-subscriber",
  "trin-metrics",
@@ -5113,7 +5115,7 @@ dependencies = [
  "bytes 1.6.0",
  "delay_map",
  "directories",
- "discv5",
+ "discv5 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "ethereum_ssz",
  "ethereum_ssz_derive",
  "ethportal-api",
@@ -5135,10 +5137,8 @@ dependencies = [
  "stunclient",
  "tempfile",
  "thiserror",
- "tokio 1.37.0",
- "tokio-macros 2.2.0",
- "tokio-stream 0.1.15",
- "tokio-util 0.7.10",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tokio-stream 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
  "tracing",
  "trin-metrics",
  "trin-storage",
@@ -5715,7 +5715,7 @@ dependencies = [
  "thiserror",
  "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tokio-stream 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
- "tokio-util 0.7.11",
+ "tokio-util 0.7.11 (registry+https://github.com/rust-lang/crates.io-index)",
  "tower",
  "tracing",
 ]
@@ -5824,7 +5824,7 @@ version = "0.1.0"
 dependencies = [
  "alloy-primitives",
  "anyhow",
- "discv5",
+ "discv5 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "ethportal-api",
  "hyper",
  "portalnet",
@@ -5834,10 +5834,7 @@ dependencies = [
  "serde_json",
  "strum",
  "thiserror",
- "tokio 1.37.0",
- "tokio-macros 2.2.0",
- "tokio-stream 0.1.15",
- "tokio-util 0.7.10",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tower",
  "tower-http",
  "tracing",
@@ -7311,7 +7308,9 @@ dependencies = [
  "libc",
  "mio 0.8.11",
  "num_cpus",
+ "parking_lot 0.12.2",
  "pin-project-lite",
+ "signal-hook-registry",
  "socket2 0.5.7",
  "tokio-macros 2.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "windows-sys 0.48.0",
@@ -7405,7 +7404,6 @@ dependencies = [
  "futures-core",
  "pin-project-lite",
  "tokio 1.37.0",
- "tokio-util 0.7.10",
 ]
 
 [[package]]
@@ -7417,6 +7415,7 @@ dependencies = [
  "futures-core",
  "pin-project-lite",
  "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tokio-util 0.7.11 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -7427,17 +7426,6 @@ checksum = "edfe50152bc8164fcc456dab7891fa9bf8beaf01c5ee7e1dd43a397c3cf87dee"
 dependencies = [
  "fnv",
  "futures 0.1.31",
-]
-
-[[package]]
-name = "tokio-test"
-version = "0.4.4"
-dependencies = [
- "async-stream",
- "bytes 1.6.0",
- "futures-core",
- "tokio 1.37.0",
- "tokio-stream 0.1.15",
 ]
 
 [[package]]
@@ -7484,7 +7472,7 @@ dependencies = [
 
 [[package]]
 name = "tokio-util"
-version = "0.7.10"
+version = "0.7.11"
 dependencies = [
  "bytes 1.6.0",
  "futures-core",
@@ -7495,7 +7483,6 @@ dependencies = [
  "pin-project-lite",
  "slab",
  "tokio 1.37.0",
- "tracing",
 ]
 
 [[package]]
@@ -7584,7 +7571,7 @@ dependencies = [
  "rand 0.8.5",
  "slab",
  "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "tokio-util 0.7.11",
+ "tokio-util 0.7.11 (registry+https://github.com/rust-lang/crates.io-index)",
  "tower-layer",
  "tower-service",
  "tracing",
@@ -7612,7 +7599,7 @@ dependencies = [
  "percent-encoding",
  "pin-project-lite",
  "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "tokio-util 0.7.11",
+ "tokio-util 0.7.11 (registry+https://github.com/rust-lang/crates.io-index)",
  "tower",
  "tower-layer",
  "tower-service",
@@ -7762,7 +7749,7 @@ dependencies = [
  "anyhow",
  "clap",
  "dirs",
- "discv5",
+ "discv5 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "ethereum_ssz",
  "ethers",
  "ethers-providers",
@@ -7782,11 +7769,7 @@ dependencies = [
  "sha3 0.9.1",
  "surf",
  "tempfile",
- "tokio 1.37.0",
- "tokio-macros 2.2.0",
- "tokio-stream 0.1.15",
- "tokio-test",
- "tokio-util 0.7.10",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tracing",
  "tracing-subscriber",
  "tree_hash",
@@ -7805,7 +7788,7 @@ name = "trin-beacon"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "discv5",
+ "discv5 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "ethereum_ssz",
  "ethportal-api",
  "light-client",
@@ -7816,10 +7799,7 @@ dependencies = [
  "rusqlite",
  "serde_json",
  "ssz_types",
- "tokio 1.37.0",
- "tokio-macros 2.2.0",
- "tokio-stream 0.1.15",
- "tokio-util 0.7.10",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tracing",
  "trin-metrics",
  "trin-storage",
@@ -7834,7 +7814,7 @@ version = "0.1.0"
 dependencies = [
  "alloy-primitives",
  "anyhow",
- "discv5",
+ "discv5 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "ethereum_ssz",
  "ethportal-api",
  "parking_lot 0.11.2",
@@ -7842,10 +7822,7 @@ dependencies = [
  "r2d2",
  "r2d2_sqlite",
  "serde_json",
- "tokio 1.37.0",
- "tokio-macros 2.2.0",
- "tokio-stream 0.1.15",
- "tokio-util 0.7.10",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tracing",
  "tree_hash",
  "trin-metrics",
@@ -7865,7 +7842,7 @@ dependencies = [
  "jni",
  "log",
  "num_cpus",
- "tokio 1.37.0",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tracing",
  "trin",
 ]
@@ -7887,7 +7864,7 @@ dependencies = [
  "alloy-primitives",
  "alloy-rlp",
  "anyhow",
- "discv5",
+ "discv5 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "eth_trie",
  "ethportal-api",
  "keccak-hash",
@@ -7896,10 +7873,7 @@ dependencies = [
  "serde",
  "serde_json",
  "thiserror",
- "tokio 1.37.0",
- "tokio-macros 2.2.0",
- "tokio-stream 0.1.15",
- "tokio-util 0.7.10",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tracing",
  "trin-storage",
  "trin-validation",
@@ -7912,7 +7886,7 @@ version = "0.1.0"
 dependencies = [
  "alloy-primitives",
  "anyhow",
- "discv5",
+ "discv5 0.4.1",
  "ethportal-api",
  "r2d2",
  "r2d2_sqlite",
@@ -7951,10 +7925,7 @@ dependencies = [
  "serde_json",
  "serde_yaml",
  "ssz_types",
- "tokio 1.37.0",
- "tokio-macros 2.2.0",
- "tokio-stream 0.1.15",
- "tokio-util 0.7.10",
+ "tokio 1.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "tree_hash",
  "tree_hash_derive",
 ]
