@@ -4,6 +4,8 @@ plugins {
 //    alias(libs.plugins.rustAndroidGradle)
 }
 
+
+
 android {
     namespace = "com.jaeckel.androidportal"
     compileSdk = 35
@@ -74,12 +76,12 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
 
-//    implementation("com.github.biafra23.samba:core:main-SNAPSHOT") {
+    implementation("com.github.biafra23.samba:core:dc459c5fe4") {
+        // exclusion needed to prevent log4j from initialising and not being able to parse the log pattern
+        exclude(group = "org.apache.logging.log4j", module = "log4j-core")
 
-//    implementation("com.github.biafra23.samba:core:main-SNAPSHOT") {
-//    implementation("com.github.biafra23.samba:core:main-b4264b49f5-1") {
-    implementation("com.github.biafra23.samba:core:b4264b49f5") {
-        exclude(group = "org.apache.logging.log4j", module = "log4j-slf4j2-impl")
+        // exclusions needed to prevent duplicate classes
+        exclude(group = "org.apache.logging.log4j", module = "log4j-slf4j-impl")
         exclude(group = "io.tmio", module = "tuweni-rlp")
         exclude(group = "io.tmio", module = "tuweni-crypto")
         exclude(group = "io.tmio", module = "tuweni-bytes")
@@ -89,7 +91,13 @@ dependencies {
         exclude(group = "org.bouncycastle", module = "bcutil-jdk18on")
         exclude(group = "org.hyperledger.besu.internal", module = "crypto")
     }
-    //implementation("com.github.biafra23q:samba:main-SNAPSHOT")
+
+    // SLF4J API
+    implementation( "org.slf4j:slf4j-api:1.7.25")
+    implementation("com.arcao:slf4j-timber:3.1@aar")
+    implementation("com.jakewharton.timber:timber:4.7.1")
+//    implementation("org.slf4j:log4j-over-slf4j:1.7.25")
+//    runtimeOnly("org.apache.logging.log4j:log4j-jul:2.17.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -126,13 +134,6 @@ dependencies {
 //        }
 //}
 
-//configurations.all {
-//    resolutionStrategy {
-////        force("org.apache.logging.log4j:log4j-core:2.23.1")
-//        force("org.apache.logging.log4j:log4j-slf4j2-impl:2.23.1")
-////        force("org.apache.logging.log4j:log4j-slf4j2-api:2.23.1")
-//    }
-//}
 configurations.all {
     resolutionStrategy {
         cacheChangingModulesFor( 0, "seconds")
