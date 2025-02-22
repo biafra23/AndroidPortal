@@ -76,12 +76,13 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
 
-    implementation("com.github.biafra23.samba:core:dc459c5fe4") {
+    implementation("com.github.biafra23.samba:core:c88d367591") {
         // exclusion needed to prevent log4j from initialising and not being able to parse the log pattern
         exclude(group = "org.apache.logging.log4j", module = "log4j-core")
 
         // exclusions needed to prevent duplicate classes
         exclude(group = "org.apache.logging.log4j", module = "log4j-slf4j-impl")
+        exclude(group = "org.apache.logging.log4j", module = "log4j-slf4j2-impl")
         exclude(group = "io.tmio", module = "tuweni-rlp")
         exclude(group = "io.tmio", module = "tuweni-crypto")
         exclude(group = "io.tmio", module = "tuweni-bytes")
@@ -93,10 +94,12 @@ dependencies {
     }
 
     // SLF4J API
-    implementation( "org.slf4j:slf4j-api:1.7.25")
+    implementation( "org.slf4j:slf4j-api:2.0.16")
+    implementation("org.slf4j:slf4j-simple:2.0.16")
     implementation("com.arcao:slf4j-timber:3.1@aar")
     implementation("com.jakewharton.timber:timber:4.7.1")
-//    implementation("org.slf4j:log4j-over-slf4j:1.7.25")
+    implementation("org.apache.logging.log4j:log4j-to-slf4j:2.24.2")
+
 //    runtimeOnly("org.apache.logging.log4j:log4j-jul:2.17.0")
 
     testImplementation(libs.junit)
