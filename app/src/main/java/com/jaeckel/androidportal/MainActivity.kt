@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -15,18 +14,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.jaeckel.androidportal.ui.theme.AndroidPortalTheme
-import okhttp3.OkHttpClient
 import samba.Samba
-import java.io.File
 
-private external fun runTrin(): String
+//import org.slf4j.LoggerFactory
+//import samba.Samba
+
+
+//private external fun runTrin(): String
+//private val logger = LoggerFactory.getLogger(MainActivity::class.java)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        println("onCreate()...-+")
+        println("MainActivity.onCreate()...")
+//        logger.info("This is an info message")
+//        logger.debug("This is a debug message")
+
+
+//        println("Enable internal status logging...")
+//        System.setProperty("log4j2.debug", "true")
+//        println("StatusLogger.getLogger()...")
+//        StatusLogger.getLogger().level = org.apache.logging.log4j.Level.DEBUG
+//        println("Calling Configurator.initialize...")
+//        Configurator.initialize(null, "res/raw/log4j2.xml")
+//        println("log4j Configurator called")
+
         //val logger = LoggerFactory.getLogger("MyApp")
         //logger.info("Hello World")
 //        val tmpFile = File.createTempFile("tmp", "")
@@ -62,7 +75,7 @@ class MainActivity : ComponentActivity() {
 //                                val response = client.newCall(request).execute()
 //                                println("----> " + response.body!!.string())
 
-                                Samba.main(arrayOf("http://localhost:8545"))
+                                Samba.main(arrayOf())
                             }).start()
                         }) {
                             Text("Start Samba")
