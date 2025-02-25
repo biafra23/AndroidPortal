@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.jaeckel.androidportal.ui.theme.AndroidPortalTheme
 import samba.Samba
+import timber.log.Timber
 
 //import org.slf4j.LoggerFactory
 //import samba.Samba
@@ -27,33 +28,7 @@ import samba.Samba
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        println("MainActivity.onCreate()...")
-//        logger.info("This is an info message")
-//        logger.debug("This is a debug message")
-
-
-//        println("Enable internal status logging...")
-//        System.setProperty("log4j2.debug", "true")
-//        println("StatusLogger.getLogger()...")
-//        StatusLogger.getLogger().level = org.apache.logging.log4j.Level.DEBUG
-//        println("Calling Configurator.initialize...")
-//        Configurator.initialize(null, "res/raw/log4j2.xml")
-//        println("log4j Configurator called")
-
-        //val logger = LoggerFactory.getLogger("MyApp")
-        //logger.info("Hello World")
-//        val tmpFile = File.createTempFile("tmp", "")
-//        val tmpDir = tmpFile.getParentFile()
-//        android.system.Os.setenv("HOME", tmpDir.absolutePath, true)
-//        android.system.Os.setenv("RUST_BACKTRACE", "full", true)
-//        android.system.Os.setenv("RUST_LOG", "debug", true)
-//        Toast.makeText(this, "System.loadLibrary(trin_jni_wrapper)", Toast.LENGTH_LONG).show()
-
-//        System.loadLibrary("trin_jni_wrapper")
-//        Thread({
-//            val result = runTrin()
-//            Toast.makeText(this, result, Toast.LENGTH_LONG).show()
-//        }).start()
+        Timber.i("MainActivity.onCreate()...")
 
         setContent {
             AndroidPortalTheme {
