@@ -2,19 +2,18 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
 //    alias(libs.plugins.rustAndroidGradle)
+    alias(libs.plugins.compose.compiler)
 }
-
-
 
 android {
     namespace = "com.jaeckel.androidportal"
     compileSdk = 35
-    ndkVersion = "23.0.7599858"
+//    ndkVersion = "23.0.7599858"
 
     defaultConfig {
         applicationId = "com.jaeckel.androidportal"
-        minSdk = 26
-        targetSdk = 34
+        minSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -61,6 +60,8 @@ android {
 }
 
 dependencies {
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
 
     implementation(libs.androidx.core.ktx)
@@ -76,7 +77,14 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
 
-    implementation("com.github.biafra23.samba:core:c88d367591") {
+//    implementation("com.github.biafra23.samba:core:cda73d39aa") {
+    implementation("com.github.biafra23.samba:core:ac5d7afce4") {
+        // use copy in libs folder to remove calls to LogManager.getLogger() which uses reflection
+        exclude("tech.pegasys.discovery", "discovery")
+        exclude("tech.pegasys.teku.internal", "async")
+        exclude("tech.pegasys.teku.internal", "infrastructure-restapi")
+        exclude("tech.pegasys.teku.internal", "json")
+
         // exclusion needed to prevent log4j from initialising and not being able to parse the log pattern
         exclude(group = "org.apache.logging.log4j", module = "log4j-core")
 
@@ -91,7 +99,20 @@ dependencies {
         exclude(group = "org.bouncycastle", module = "bcprov-jdk18on")
         exclude(group = "org.bouncycastle", module = "bcutil-jdk18on")
         exclude(group = "org.hyperledger.besu.internal", module = "crypto")
+
+        // exclude oshi-core to prevent duplicate classes
+        exclude(group = "net.java.dev.jna", module = "jna")
+        exclude(group = "net.java.dev.jna", module = "jna-platform")
+
+        exclude(group = "org.rocksdb", module = "rocksdbjni")
+
+        // These need to be excluded here because the libs in
+        // ./libs depend on them so we have to have them further down this file.
+        exclude(group = "com.google.guava", module = "guava")
+//        exclude(group = "io.javalin", module = "javalin")
+//        exclude(group = "org.thymeleaf", module = "thymeleaf")
     }
+    implementation("org.bouncycastle:bcprov-jdk15on:1.70")
 
     // SLF4J API
     implementation( "org.slf4j:slf4j-api:2.0.16")
@@ -109,6 +130,19 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation("net.java.dev.jna:jna:4.4.0@aar")
+    implementation("io.projectreactor:reactor-core:3.5.0")
+//    implementation("org.rocksdb:rocksdbjni:9.10.0")
+    implementation("io.maryk.rocksdb:rocksdb-android:9.7.3")
+//    implementation("io.maryk.rocksdb:rocksdb-android:9.10.0")
+    implementation("io.maryk.lz4:lz4-android:1.10.0")
+    implementation("com.google.guava:guava:33.4.0-android")
+
+    implementation("io.javalin:javalin:6.2.0")
+    implementation("io.javalin:javalin-rendering:5.6.5")
+    implementation("org.thymeleaf:thymeleaf:3.1.2.RELEASE")
+    implementation("org.webjars:swagger-ui:5.17.14")
 
 }
 

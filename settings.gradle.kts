@@ -15,6 +15,10 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        // Add a flat directory repository
+        flatDir {
+            dirs("libs") // Replace "libs" with the path to your local directory
+        }
         google()
         mavenCentral()
         maven {
