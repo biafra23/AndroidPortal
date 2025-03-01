@@ -15,20 +15,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.jaeckel.androidportal.ui.theme.AndroidPortalTheme
+import org.slf4j.LoggerFactory
 import samba.Samba
-import timber.log.Timber
 
-//import org.slf4j.LoggerFactory
-//import samba.Samba
-
-
-//private external fun runTrin(): String
-//private val logger = LoggerFactory.getLogger(MainActivity::class.java)
+private val logger = LoggerFactory.getLogger(MainActivity::class.java)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.i("MainActivity.onCreate()...")
+        logger.info("MainActivity.onCreate()...")
 
         setContent {
             AndroidPortalTheme {
