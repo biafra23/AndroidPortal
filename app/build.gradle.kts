@@ -7,12 +7,18 @@ plugins {
 
 android {
     namespace = "com.jaeckel.androidportal"
-    compileSdk = 35
+    compileSdk = 34
 //    ndkVersion = "23.0.7599858"
+
+    sourceSets {
+        getByName("main") {
+            resources.srcDirs("src/main/resources")
+        }
+    }
 
     defaultConfig {
         applicationId = "com.jaeckel.androidportal"
-        minSdk = 34
+        minSdk = 35
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -26,10 +32,11 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+           // proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             android.packagingOptions.jniLibs.keepDebugSymbols += "**/*.so"
         }
         debug {
+            isMinifyEnabled = false
             android.packagingOptions.jniLibs.keepDebugSymbols += "**/*.so"
 //            debuggable = true
 //            jniDebuggable = true
@@ -52,9 +59,17 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
-            excludes += "META-INF/**"
-            excludes += "log4j2.xml"
+            excludes += "/META-INF/DEPENDENCIES"
+            excludes += "/META-INF/DISCLAIMER"
+            excludes += "/META-INF/INDEX.LIST"
+            excludes += "/META-INF/io.netty.versions.properties"
+            excludes += "/META-INF/versions/9/OSGI-INF/MANIFEST.MF"
+//            excludes += "'META-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat"
+//            excludes += "META-INF/**"
             excludes += "kzg-trusted-setups/mainnet.txt"
+
+            pickFirsts += "log4j2.xml"
+            pickFirsts += "META-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat"
         }
     }
 }
@@ -78,7 +93,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor")
 
 //    implementation("com.github.biafra23.samba:core:cda73d39aa") {
-    implementation("com.github.biafra23.samba:core:ac5d7afce4") {
+    implementation("com.github.biafra23.samba:core:b4b8389f51") {
         // use copy in libs folder to remove calls to LogManager.getLogger() which uses reflection
         exclude("tech.pegasys.discovery", "discovery")
         exclude("tech.pegasys.teku.internal", "async")
@@ -116,12 +131,13 @@ dependencies {
 
     // SLF4J API
     implementation( "org.slf4j:slf4j-api:2.0.16")
-    implementation("org.slf4j:slf4j-simple:2.0.16")
-    implementation("com.arcao:slf4j-timber:3.1@aar")
+//    implementation("org.slf4j:slf4j-simple:2.0.16")
+//    implementation("com.arcao:slf4j-timber:3.1@aar")
     implementation("com.jakewharton.timber:timber:4.7.1")
-    implementation("org.apache.logging.log4j:log4j-to-slf4j:2.24.2")
-
-//    runtimeOnly("org.apache.logging.log4j:log4j-jul:2.17.0")
+//    implementation("org.apache.logging.log4j:log4j-to-slf4j:2.24.2")
+//    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.24.2")
+    implementation("org.apache.logging.log4j:log4j-core:2.24.2")
+    implementation("com.github.tony19:logback-android:3.0.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -134,8 +150,8 @@ dependencies {
     implementation("net.java.dev.jna:jna:4.4.0@aar")
     implementation("io.projectreactor:reactor-core:3.5.0")
 //    implementation("org.rocksdb:rocksdbjni:9.10.0")
-    implementation("io.maryk.rocksdb:rocksdb-android:9.7.3")
-//    implementation("io.maryk.rocksdb:rocksdb-android:9.10.0")
+//    implementation("io.maryk.rocksdb:rocksdb-android:9.7.3")
+    implementation("io.maryk.rocksdb:rocksdb-android:9.10.0")
     implementation("io.maryk.lz4:lz4-android:1.10.0")
     implementation("com.google.guava:guava:33.4.0-android")
 

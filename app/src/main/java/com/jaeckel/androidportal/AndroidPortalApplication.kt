@@ -1,12 +1,13 @@
 package com.jaeckel.androidportal
 
 import android.app.Application
-import com.arcao.slf4j.timber.BuildConfig
+import ch.qos.logback.classic.Level
+import ch.qos.logback.classic.android.LogcatAppender
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder
 import org.bouncycastle.jce.provider.BouncyCastleProvider
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import timber.log.Timber
 import java.io.File
-import java.security.KeyPairGenerator
 import java.security.Security
 
 
@@ -15,16 +16,7 @@ class AndroidPortalApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        // Set the library path
-        val libDir = File(applicationContext.filesDir, "lib")
-        if (!libDir.exists()) {
-            libDir.mkdirs()
-        }
-//        System.setProperty("java.library.path", "/system/lib64/")
-//
-//        // Load the native library
-//        System.loadLibrary("lz4")
-
+        initLogging()
         // Android registers its own BC provider. As it might be outdated and might not include
         // all needed ciphers, we substitute it with a known BC bundled in the app.
         // Android's BC has its package rewritten to "com.android.org.bouncycastle" and because
@@ -32,15 +24,20 @@ class AndroidPortalApplication : Application() {
         Security.removeProvider(BouncyCastleProvider.PROVIDER_NAME)
         Security.insertProviderAt(BouncyCastleProvider(), 1)
 
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        } else {
-            Timber.plant(Timber.DebugTree())
-//            Timber.plant(CrashReportingTree())
-        }
+        val path = getApplicationContext().getFilesDir().getAbsolutePath()
+        logger.info("path: $path")
 
+//        if (BuildConfig.DEBUG) {
+//        } else {
+//            Timber.plant(Timber.DebugTree())
+////            Timber.plant(CrashReportingTree())
+//        }
+//        Timber.d("TIMBER <DEBUG> ")
+//        Timber.i("TIMBER <INFO> ")
+//        Timber.w("TIMBER <WARN> ")
+//        Timber.e("TIMBER <ERROR> ")
         logger.debug("<DEBUG>")
-        logger.info("<INFO>")
+        logger.info("<INFO> {}", logger)
         logger.warn("<WARN>")
         logger.error("<ERROR>")
 
@@ -52,4 +49,34 @@ class AndroidPortalApplication : Application() {
             File(sambaDir).deleteRecursively()
         }
     }
+
+    private fun initLogging() {
+        val context = LoggerFactory.getILoggerFactory() as ch.qos.logback.classic.LoggerContext
+
+        val filePattern = PatternLayoutEncoder()
+        filePattern.context = context
+        filePattern.pattern = "%d{HH:mm:ss,UTC} [%thread] %logger{0} - %msg%n"
+        filePattern.start()
+
+        val logcatTagPattern = PatternLayoutEncoder()
+        logcatTagPattern.context = context
+        logcatTagPattern.pattern = "%logger{0}"
+        logcatTagPattern.start()
+
+        val logcatPattern = PatternLayoutEncoder()
+        logcatPattern.context = context
+        logcatPattern.pattern = "[%thread] %msg%n"
+        logcatPattern.start()
+
+        val logcatAppender = LogcatAppender()
+        logcatAppender.context = context
+        logcatAppender.tagEncoder = logcatTagPattern
+        logcatAppender.encoder = logcatPattern
+        logcatAppender.start()
+
+        val log = context.getLogger(Logger.ROOT_LOGGER_NAME)
+        log.addAppender(logcatAppender)
+        log.level = Level.TRACE
+    }
+
 }
