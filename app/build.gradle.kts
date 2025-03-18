@@ -91,14 +91,26 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+//    implementation("org.apache.tuweni:tuweni-bytes:2.3.1")
+    implementation("io.tmio:tuweni-bytes:2.4.2")
+    implementation("io.tmio:tuweni-crypto:2.4.2")
+    implementation("io.tmio:tuweni-units:2.4.2")
+    implementation("io.tmio:tuweni-rlp:2.4.2")
+    implementation("io.projectreactor:reactor-core:3.6.7")
+    implementation("io.netty:netty-all:4.1.115.Final")
+//    implementation("tech.pegasys.teku.internal:bytes:24.8.0") {
+//        exclude(group = "org.apache.tuweni", module = "tuweni-bytes")
+//    }
 
 //    implementation("com.github.biafra23.samba:core:cda73d39aa") {
-    implementation("com.github.biafra23.samba:core:b4b8389f51") {
+    implementation("com.github.biafra23.samba:core:956fbf2df0") {
         // use copy in libs folder to remove calls to LogManager.getLogger() which uses reflection
         exclude("tech.pegasys.discovery", "discovery")
         exclude("tech.pegasys.teku.internal", "async")
         exclude("tech.pegasys.teku.internal", "infrastructure-restapi")
         exclude("tech.pegasys.teku.internal", "json")
+        exclude("tech.pegasys.teku.internal", "crypto")
+        exclude("tech.pegasys.teku.internal", "ssz")
 
         // exclusion needed to prevent log4j from initialising and not being able to parse the log pattern
         exclude(group = "org.apache.logging.log4j", module = "log4j-core")
@@ -106,13 +118,15 @@ dependencies {
         // exclusions needed to prevent duplicate classes
         exclude(group = "org.apache.logging.log4j", module = "log4j-slf4j-impl")
         exclude(group = "org.apache.logging.log4j", module = "log4j-slf4j2-impl")
-        exclude(group = "io.tmio", module = "tuweni-rlp")
-        exclude(group = "io.tmio", module = "tuweni-crypto")
-        exclude(group = "io.tmio", module = "tuweni-bytes")
-        exclude(group = "io.tmio", module = "tuweni-units")
-        exclude(group = "io.tmio", module = "tuweni-io")
-        exclude(group = "org.bouncycastle", module = "bcprov-jdk18on")
-        exclude(group = "org.bouncycastle", module = "bcutil-jdk18on")
+
+        exclude(group = "org.apache.tuweni", module = "tuweni-rlp")
+        exclude(group = "org.apache.tuweni", module = "tuweni-crypto")
+        exclude(group = "org.apache.tuweni", module = "tuweni-bytes")
+        exclude(group = "org.apache.tuweni", module = "tuweni-units")
+        exclude(group = "org.apache.tuweni", module = "tuweni-io")
+
+//        exclude(group = "org.bouncycastle", module = "bcprov-jdk18on")
+//        exclude(group = "org.bouncycastle", module = "bcutil-jdk18on")
         exclude(group = "org.hyperledger.besu.internal", module = "crypto")
 
         // exclude oshi-core to prevent duplicate classes
@@ -124,10 +138,29 @@ dependencies {
         // These need to be excluded here because the libs in
         // ./libs depend on them so we have to have them further down this file.
         exclude(group = "com.google.guava", module = "guava")
+        exclude(group = "org.slf4j", module = "slf4j-reload4j")
 //        exclude(group = "io.javalin", module = "javalin")
 //        exclude(group = "org.thymeleaf", module = "thymeleaf")
+//        exclude(group = "org.meldsun.utp:utp-core", module = "1.0-SNAPSHOT")
     }
-    implementation("org.bouncycastle:bcprov-jdk15on:1.70")
+    implementation("com.github.biafra23:discovery:master-SNAPSHOT") {
+//        exclude(group = "org.bouncycastle", module = "bcprov-jdk18on")
+        exclude(group = "org.apache.tuweni", module = "tuweni-rlp")
+        exclude(group = "org.apache.tuweni", module = "tuweni-crypto")
+        exclude(group = "org.apache.tuweni", module = "tuweni-bytes")
+        exclude(group = "org.apache.tuweni", module = "tuweni-units")
+        exclude(group = "org.apache.tuweni", module = "tuweni-io")
+    }
+//    implementation("com.github.meldsun0:utp:1.0-SNAPSHOT") {
+//        exclude(group = "org.apache.tuweni", module = "tuweni-rlp")
+//        exclude(group = "org.apache.tuweni", module = "tuweni-crypto")
+//        exclude(group = "org.apache.tuweni", module = "tuweni-bytes")
+//        exclude(group = "org.apache.tuweni", module = "tuweni-units")
+//        exclude(group = "org.apache.tuweni", module = "tuweni-io")
+//    }
+
+    implementation("org.bouncycastle:bcprov-jdk18on:1.78.1")
+    implementation("org.bouncycastle:bcutil-jdk18on:1.78.1")
 
     // SLF4J API
     implementation( "org.slf4j:slf4j-api:2.0.16")
@@ -153,13 +186,14 @@ dependencies {
 //    implementation("io.maryk.rocksdb:rocksdb-android:9.7.3")
     implementation("io.maryk.rocksdb:rocksdb-android:9.10.0")
     implementation("io.maryk.lz4:lz4-android:1.10.0")
-    implementation("com.google.guava:guava:33.4.0-android")
+        // NonSerializableMemoizingSupplier stopped implementing java.util.function.Supplier in 21.0
+//    implementation("com.google.guava:guava:33.4.0-android")
+    implementation("com.google.guava:guava:33.4.0-jre")
 
     implementation("io.javalin:javalin:6.2.0")
     implementation("io.javalin:javalin-rendering:5.6.5")
     implementation("org.thymeleaf:thymeleaf:3.1.2.RELEASE")
     implementation("org.webjars:swagger-ui:5.17.14")
-
 }
 
 //cargo {

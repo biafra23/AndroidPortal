@@ -22,20 +22,15 @@ class AndroidPortalApplication : Application() {
         // Android's BC has its package rewritten to "com.android.org.bouncycastle" and because
         // of that it's possible to have another BC implementation loaded in VM.
         Security.removeProvider(BouncyCastleProvider.PROVIDER_NAME)
-        Security.insertProviderAt(BouncyCastleProvider(), 1)
+        // We need to add the provider at the end to make sure discovery uses "AndroidOpenSSL" and not "BC"
+        // As the AES Cipher provided by BC is not compatible :-(
+        Security.addProvider(BouncyCastleProvider())
 
+        for (provider in Security.getProviders()) {
+            logger.info("Security provider: " + provider.name)
+        }
         val path = getApplicationContext().getFilesDir().getAbsolutePath()
         logger.info("path: $path")
-
-//        if (BuildConfig.DEBUG) {
-//        } else {
-//            Timber.plant(Timber.DebugTree())
-////            Timber.plant(CrashReportingTree())
-//        }
-//        Timber.d("TIMBER <DEBUG> ")
-//        Timber.i("TIMBER <INFO> ")
-//        Timber.w("TIMBER <WARN> ")
-//        Timber.e("TIMBER <ERROR> ")
         logger.debug("<DEBUG>")
         logger.info("<INFO> {}", logger)
         logger.warn("<WARN>")
@@ -76,7 +71,9 @@ class AndroidPortalApplication : Application() {
 
         val log = context.getLogger(Logger.ROOT_LOGGER_NAME)
         log.addAppender(logcatAppender)
-        log.level = Level.TRACE
+//        log.level = Level.INFO
+        log.level = Level.DEBUG
+//        log.level = Level.TRACE
     }
 
 }

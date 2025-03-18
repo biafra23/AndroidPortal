@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
 //                                val response = client.newCall(request).execute()
 //                                println("----> " + response.body!!.string())
 
-                                Samba.main(arrayOf())
+                                Samba.main(arrayOf("--data-path=/data/user/0/com.jaeckel.androidportal/files/samba/"))
                             }).start()
                         }) {
                             Text("Start Samba")
