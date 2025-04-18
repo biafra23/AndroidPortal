@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-//    alias(libs.plugins.rustAndroidGradle)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -195,31 +194,6 @@ dependencies {
     implementation("org.thymeleaf:thymeleaf:3.1.2.RELEASE")
     implementation("org.webjars:swagger-ui:5.17.14")
 }
-
-//cargo {
-//    module = "../trin-jni-wrapper"       // Or whatever directory contains your Cargo.toml
-//    libname = "trin_jni_wrapper"          // Or whatever matches Cargo.toml's [package] name.
-//    targets = listOf("arm64")  // See bellow for a longer list of options
-//    //prebuiltToolchains = true
-//    //verbose = true
-//    apiLevel = 24
-////    profile = "debug"
-//    profile = "release"
-//    //extraCargoBuildArguments = listOf("+1.76-")
-//}
-
-//project.afterEvaluate {
-//    tasks.withType(com.nishtahir.CargoBuildTask::class)
-//        .forEach { buildTask ->
-//            tasks.withType(com.android.build.gradle.tasks.MergeSourceSetFolders::class)
-//                .configureEach {
-//                    this.inputs.dir(
-//                        layout.buildDirectory.dir("rustJniLibs" + File.separatorChar + buildTask.toolchain!!.folder)
-//                    )
-//                    this.dependsOn(buildTask)
-//                }
-//        }
-//}
 
 configurations.all {
     resolutionStrategy {

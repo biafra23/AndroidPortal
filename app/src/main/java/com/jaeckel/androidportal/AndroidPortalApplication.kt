@@ -71,8 +71,8 @@ class AndroidPortalApplication : Application() {
 
         val log = context.getLogger(Logger.ROOT_LOGGER_NAME)
         log.addAppender(logcatAppender)
-//        log.level = Level.INFO
-        log.level = Level.DEBUG
+        log.level = Level.INFO
+//        log.level = Level.DEBUG
 //        log.level = Level.TRACE
     }
 

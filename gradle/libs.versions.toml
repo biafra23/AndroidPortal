@@ -8,7 +8,6 @@ espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.9.0"
 composeBom = "2023.08.00"
-#rust-android-gradle = "0.9.4"
 kethereum = "0.84.2"
 
 [libraries]
@@ -31,5 +30,4 @@ kethereum-rpc = { group = "com.github.komputing.kethereum", name = "rpc", versio
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-#rustAndroidGradle = { id = "org.mozilla.rust-android-gradle.rust-android", version.ref = "rust-android-gradle" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
