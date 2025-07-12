@@ -15,20 +15,19 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        mavenLocal()
         // Add a flat directory repository
         flatDir {
             dirs("libs") // Replace "libs" with the path to your local directory
         }
         google()
         mavenCentral()
-        maven {
-            url = uri("https://jitpack.io")
-        }
-        maven { url = uri("https://artifacts.consensys.net/public/maven/maven/") }
-        maven { url = uri("https://artifacts.consensys.net/public/teku/maven/") }
-        maven { url = uri("https://mvnrepository.com") }
-        maven { url = uri("https://hyperledger.jfrog.io/artifactory/besu-maven/") }
-        maven { url = uri("https://dl.cloudsmith.io/public/libp2p/jvm-libp2p/maven/") }
+        maven("https://jitpack.io")
+        maven("https://artifacts.consensys.net/public/maven/maven/")
+        maven("https://artifacts.consensys.net/public/teku/maven/")
+        maven("https://mvnrepository.com")
+        maven("https://hyperledger.jfrog.io/artifactory/besu-maven/")
+        maven("https://dl.cloudsmith.io/public/libp2p/jvm-libp2p/maven/")
     }
 }
 

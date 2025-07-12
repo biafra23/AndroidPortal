@@ -1,12 +1,20 @@
 package com.jaeckel.androidportal
 
 import android.app.Application
+import android.content.Context
+import android.content.pm.PackageManager
+import androidx.core.content.ContextCompat
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.android.LogcatAppender
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+
+import timber.log.Timber
 import java.io.File
 import java.security.Security
 
@@ -29,20 +37,55 @@ class AndroidPortalApplication : Application() {
         for (provider in Security.getProviders()) {
             logger.info("Security provider: " + provider.name)
         }
-        val path = getApplicationContext().getFilesDir().getAbsolutePath()
-        logger.info("path: $path")
+        val filesDir = applicationContext.filesDir
+
+        logger.info("path: ${filesDir.absolutePath}")
         logger.debug("<DEBUG>")
         logger.info("<INFO> {}", logger)
         logger.warn("<WARN>")
         logger.error("<ERROR>")
 
-        val filesDir: File = applicationContext.filesDir
-        val absolutePath: String = filesDir.absolutePath
-        val sambaDir = absolutePath + "/samba"
+        logger.info("Starting Kubo...")
+        // Start Kubo
+
+        val ipfsRepoPath = filesDir.absolutePath + "/ipfs_repo"
+        if (!File(ipfsRepoPath).exists()) {
+            File(ipfsRepoPath).mkdir()
+        }
+
+        val sambaDir = filesDir.absolutePath + "/samba"
         if (File(sambaDir).exists()) {
-            logger.info("Deleting samba directory")
+            logger.error("Deleting samba directory")
             File(sambaDir).deleteRecursively()
         }
+
+        // Example usage (in an Activity or Fragment):
+        if (hasNetworkStatePermission(this)) {
+            // Proceed with accessing network state information
+            logger.info("Network state permission granted")
+            CoroutineScope(Dispatchers.IO).launch {
+                logger.info("--> Running ipfs daemon...")
+                try {
+                    // start Kubo as a daemon and initialize repo if necessary
+                    // --------------> Kubo.runCli(ipfsRepoPath, "INFO", "daemon --init")
+                } catch (e: Exception) {
+                    Timber.e("Error starting IPFS daemon: ${e.message}")
+                    e.printStackTrace()
+                }
+            }
+        } else {
+            logger.info("Network state permission granted")
+            // Handle the case where the permission is not granted (though unlikely on modern Android)
+            // You might log a warning or inform the user that the app might not be able to
+            // function correctly without the permission.
+        }
+    }
+
+    fun hasNetworkStatePermission(context: Context): Boolean {
+        return ContextCompat.checkSelfPermission(
+            context,
+            "android.permission.ACCESS_NETWORK_STATE"
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun initLogging() {
