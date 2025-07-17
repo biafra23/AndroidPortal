@@ -171,7 +171,7 @@ fun MainScreen(
 //                logger.error("---> sambaSDK: $sambaSDK")
 
 //               val blockNumber = 15_100_000L
-                val blockNumber = 1_149_999L // Frontier (last block)
+//                val blockNumber = 1_149_999L // Frontier (last block)
 //                val blockNumber = 1_150_000L // Homestead ?
 //                val blockNumber = 1_160_001L // Homestead
 //                val blockNumber = 4_370_000L // Byzantium
@@ -188,7 +188,7 @@ fun MainScreen(
 //                val blockNumber = 12_799_900L // works
 //                val blockNumber = 12_799_940L // works
 //                val blockNumber = 12_799_945L // works
-//                val blockNumber = 12_799_946L // works
+                val blockNumber = 12_799_946L // works
 //                val blockNumber = 12_799_947L // broken
 //                val blockNumber = 12_799_950L // broken
 //                val blockNumber = 12_799_990L // broken
