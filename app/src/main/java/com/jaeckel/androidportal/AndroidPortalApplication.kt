@@ -10,6 +10,7 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kubo.Kubo
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -45,9 +46,6 @@ class AndroidPortalApplication : Application() {
         logger.warn("<WARN>")
         logger.error("<ERROR>")
 
-        logger.info("Starting Kubo...")
-        // Start Kubo
-
         val ipfsRepoPath = filesDir.absolutePath + "/ipfs_repo"
         if (!File(ipfsRepoPath).exists()) {
             File(ipfsRepoPath).mkdir()
@@ -67,7 +65,7 @@ class AndroidPortalApplication : Application() {
                 logger.info("--> Running ipfs daemon...")
                 try {
                     // start Kubo as a daemon and initialize repo if necessary
-                    // --------------> Kubo.runCli(ipfsRepoPath, "INFO", "daemon --init")
+                    Kubo.runCli(ipfsRepoPath, "INFO", "daemon --init")
                 } catch (e: Exception) {
                     Timber.e("Error starting IPFS daemon: ${e.message}")
                     e.printStackTrace()
