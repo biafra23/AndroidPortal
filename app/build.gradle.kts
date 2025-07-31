@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.jaeckel.androidportal"
-    compileSdk = 34
+    compileSdk = 35
 //    ndkVersion = "23.0.7599858"
 
     sourceSets {
@@ -17,8 +17,8 @@ android {
 
     defaultConfig {
         applicationId = "com.jaeckel.androidportal"
-        minSdk = 31
-        targetSdk = 33
+        minSdk = 34
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -75,7 +75,7 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+//    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
 
     coreLibraryDesugaring(libs.desugar.jdk.libs)
@@ -103,60 +103,8 @@ dependencies {
 //        exclude(group = "org.apache.tuweni", module = "tuweni-bytes")
 //    }
 
-//    implementation("com.github.biafra23.samba:core:cda73d39aa") {
-//    implementation("com.github.biafra23.samba:core:956fbf2df0") {
-//    implementation("com.github.biafra23.samba:core:a4a85b158e") {
-    implementation("samba:core:1.0-SNAPSHOT") { // mavenLocal
-//    implementation("com.github.biafra23.samba:core:main-SNAPSHOT") {
-        // use copy in libs folder to remove calls to LogManager.getLogger() which uses reflection
-        exclude("tech.pegasys.discovery", "discovery")
-        exclude("tech.pegasys.teku.internal", "async")
-        exclude("tech.pegasys.teku.internal", "infrastructure-restapi")
-        exclude("tech.pegasys.teku.internal", "json")
-        exclude("tech.pegasys.teku.internal", "crypto")
-        exclude("tech.pegasys.teku.internal", "ssz")
+    implementation("com.jaeckel.samba:samba-android-wrapper:1.0.0-SNAPSHOT")
 
-        exclude("org.hyperledger.besu.internal", "algorithms")
-        exclude("org.hyperledger.besu.internal", "crypto")
-        exclude("org.hyperledger.besu.internal", "core")
-
-        // exclusion needed to prevent log4j from initialising and not being able to parse the log pattern
-        exclude(group = "org.apache.logging.log4j", module = "log4j-core")
-
-        // exclusions needed to prevent duplicate classes
-        exclude(group = "org.apache.logging.log4j", module = "log4j-slf4j-impl")
-        exclude(group = "org.apache.logging.log4j", module = "log4j-slf4j2-impl")
-
-        exclude(group = "org.apache.tuweni", module = "tuweni-rlp")
-        exclude(group = "org.apache.tuweni", module = "tuweni-crypto")
-        exclude(group = "org.apache.tuweni", module = "tuweni-bytes")
-        exclude(group = "org.apache.tuweni", module = "tuweni-units")
-        exclude(group = "org.apache.tuweni", module = "tuweni-io")
-
-        exclude(group = "io.tmio", module = "tuweni-rlp")
-        exclude(group = "io.tmio", module = "tuweni-crypto")
-        exclude(group = "io.tmio", module = "tuweni-bytes")
-        exclude(group = "io.tmio", module = "tuweni-units")
-        exclude(group = "io.tmio", module = "tuweni-io")
-
-//        exclude(group = "org.bouncycastle", module = "bcprov-jdk18on")
-//        exclude(group = "org.bouncycastle", module = "bcutil-jdk18on")
-
-        // exclude oshi-core to prevent duplicate classes
-        exclude(group = "net.java.dev.jna", module = "jna")
-        exclude(group = "net.java.dev.jna", module = "jna-platform")
-
-        exclude(group = "org.rocksdb", module = "rocksdbjni")
-
-        // These need to be excluded here because the libs in
-        // ./libs depend on them so we have to have them further down this file.
-        exclude(group = "com.google.guava", module = "guava")
-        exclude(group = "org.slf4j", module = "slf4j-reload4j")
-//        exclude(group = "io.javalin", module = "javalin")
-//        exclude(group = "org.thymeleaf", module = "thymeleaf")
-//        exclude(group = "org.meldsun.utp:utp-core", module = "1.0-SNAPSHOT")
-        exclude(group = "tech.pegasys", module = "jc-kzg-4844")
-    }
     implementation("tech.pegasys.discovery:discovery:develop") {
 //    implementation("com.github.biafra23:discovery:master-SNAPSHOT") {
 //    implementation("tech.pegasys:discovery:25.4.0")
@@ -173,13 +121,6 @@ dependencies {
         exclude(group = "io.tmio", module = "tuweni-units")
         exclude(group = "io.tmio", module = "tuweni-io")
     }
-//    implementation("com.github.meldsun0:utp:1.0-SNAPSHOT") {
-//        exclude(group = "org.apache.tuweni", module = "tuweni-rlp")
-//        exclude(group = "org.apache.tuweni", module = "tuweni-crypto")
-//        exclude(group = "org.apache.tuweni", module = "tuweni-bytes")
-//        exclude(group = "org.apache.tuweni", module = "tuweni-units")
-//        exclude(group = "org.apache.tuweni", module = "tuweni-io")
-//    }
 
     implementation("org.bouncycastle:bcprov-jdk18on:1.78.1")
     implementation("org.bouncycastle:bcutil-jdk18on:1.78.1")
