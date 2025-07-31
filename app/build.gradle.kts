@@ -18,7 +18,7 @@ android {
     defaultConfig {
         applicationId = "com.jaeckel.androidportal"
         minSdk = 31
-        targetSdk = 31
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
