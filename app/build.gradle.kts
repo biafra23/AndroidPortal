@@ -95,7 +95,16 @@ dependencies {
     implementation("io.projectreactor:reactor-core:3.6.7")
     implementation("io.netty:netty-all:4.1.115.Final")
 
-    implementation("com.jaeckel.samba:samba-android-wrapper:1.0.0-SNAPSHOT")
+//    implementation("com.jaeckel.samba:samba-android-wrapper:1.0.0-SNAPSHOT") // mavenLocal
+//    implementation("com.github.biafra23:SambaWrapper:2a091ef182")
+//    implementation("com.github.biafra23:SambaWrapper:1094aae121")  {    // jna as api
+//    implementation("com.github.biafra23:SambaWrapper:59ef9cdf73")  // {    // Use JNA 5.13.0 as a jar
+ //   implementation("com.github.biafra23:SambaWrapper:d27e52ffb3")   //{    // jdk21
+//    implementation("com.github.biafra23:SambaWrapper:13112c5ed7")   {    // aar 5.13.0
+    implementation("com.github.biafra23:SambaWrapper:e2e14bba9a")   {    // aar 5.17.0
+        exclude(group = "net.java.dev.jna", module = "jna")
+    }
+    implementation("net.java.dev.jna:jna:5.17.0@aar") // missing at runtime when using jitpack build version of SambaWrapper
 
     implementation("org.bouncycastle:bcprov-jdk18on:1.78.1")
     implementation("org.bouncycastle:bcutil-jdk18on:1.78.1")

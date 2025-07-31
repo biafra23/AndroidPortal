@@ -14,6 +14,7 @@ import kubo.Kubo
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import samba.Samba
 
 import timber.log.Timber
 import java.io.File
@@ -61,22 +62,33 @@ class AndroidPortalApplication : Application() {
         if (hasNetworkStatePermission(this)) {
             // Proceed with accessing network state information
             logger.info("Network state permission granted")
-            CoroutineScope(Dispatchers.IO).launch {
-                logger.info("--> Running ipfs daemon...")
-                try {
-                    // start Kubo as a daemon and initialize repo if necessary
-                    Kubo.runCli(ipfsRepoPath, "INFO", "daemon --init")
-                } catch (e: Exception) {
-                    Timber.e("Error starting IPFS daemon: ${e.message}")
-                    e.printStackTrace()
-                }
-            }
+//            CoroutineScope(Dispatchers.IO).launch {
+//                logger.info("--> Running ipfs daemon...")
+//                try {
+//                    // start Kubo as a daemon and initialize repo if necessary
+//                    Kubo.runCli(ipfsRepoPath, "INFO", "daemon --init")
+//                } catch (e: Exception) {
+//                    Timber.e("Error starting IPFS daemon: ${e.message}")
+//                    e.printStackTrace()
+//                }
+//            }
         } else {
             logger.info("Network state permission granted")
             // Handle the case where the permission is not granted (though unlikely on modern Android)
             // You might log a warning or inform the user that the app might not be able to
             // function correctly without the permission.
         }
+        /* do something on click */
+        Thread({
+            //Samba.main(arrayOf("--data-path=/data/user/0/com.jaeckel.androidportal/files/samba/"))
+            val options = arrayOf(
+                "--data-path=$sambaDir",
+//                        "--disable-json-rpc-server",
+                "--disable-rest--server",
+                "--disable-metric--server"
+            )
+            sambaSDK = Samba.init(options)
+        }).start()
     }
 
     fun hasNetworkStatePermission(context: Context): Boolean {
